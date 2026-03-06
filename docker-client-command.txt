@@ -1,0 +1,66 @@
+// แสดงเวอร์ชันของ docker
+docker -v
+
+// ทดสอบระบบว่า Docker ในเครื่องติดตั้งเสร็จสมบูรณ์และพร้อมใช้งานหรือไม่
+docker run hello-world
+
+// ใช้สำหรับ ตรวจสอบสถานะของ Container ที่กำลังทำงานอยู่ในขณะนี้
+docker ps
+
+// การแสดง container ทั้งหมดออกมา
+docker ps --all 
+
+// การสั่งให้ Docker ทำงานแบบ "แวบเดียวจบ" เพื่อรันคำสั่งที่เราต้องการข้างใน Container
+docker run busybox echo 'hello world in docker'
+
+// การสั่งให้ Docker "ลิสต์รายชื่อไฟล์และโฟลเดอร์" ที่อยู่ภายใน Container ของ BusyBox
+docker run busybox ls // ls คือ command ในการใช้ execute
+
+docker run busybox ping google.com
+
+docker stop CONTAINER ID
+
+docker pull busybox
+
+docker create busybox ping google.com
+
+docker start CONTAINER ID
+
+docker rm CONTAINER ID
+
+docker run nginx
+
+docker exec -it CONTAINER ID sh
+
+docker exec -it CONTAINER ID bash
+
+cd /usr/share/nginx/html/
+
+cat index.html
+
+docker run -d -p 80:80 nginx 
+
+docker pull wordpress
+docker pull mysql:5.7
+docker pull phpmyadmin/phpmyadmin
+
+**Create Network
+
+docker network create wordpress
+docker network ls
+
+**Join Network
+
+
+
+docker run --name mysql --network wordpress -e MYSQL_ROOT_PASSWORD=1111 -e MYSQL_DATABASE=wordpress_db -e MYSQL_USER=wordpress -e MYSQL_PASSWORD=wordpress -d mysql:5.7
+docker run --name pma --network wordpress -p 8888:80 -e PMA_ARBITRARY=1 -d phpmyadmin/phpmyadmin
+docker run -d \
+  --name wordpress \
+  --network wordpress \
+  -p 888:80 \
+  -e WORDPRESS_DB_HOST=mysql \
+  -e WORDPRESS_DB_USER=wordpress \
+  -e WORDPRESS_DB_PASSWORD=wordpress \
+  -e WORDPRESS_DB_NAME=wordpress \
+  wordpress
